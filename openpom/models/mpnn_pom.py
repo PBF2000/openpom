@@ -599,3 +599,17 @@ class MPNNPOMModel(TorchModel):
         _, labels, weights = super(MPNNPOMModel, self)._prepare_batch(
             ([], labels, weights))
         return g, labels, weights
+
+    def load_state_dict(self, state_dict: dict, strict: bool = True):
+        """
+        Loads a state dict into the internal model (MPNNPOM).
+
+        Parameters
+        ----------
+        state_dict: dict
+            The state dictionary to load.
+        strict: bool
+            Whether to strictly enforce that the keys in `state_dict` match
+            the keys returned by `model.state_dict()`.
+        """
+        self.model.load_state_dict(state_dict, strict)
